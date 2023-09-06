@@ -9,31 +9,44 @@ function merge(intervals) {
 
     do {
 
+        isMerged = false;
         let result = [];
 
         while(stack.length > 0) {
-            const wasSplittedIndexes = []
-            const iterable = stack.pop();
-            let [fi, li] = iterable;
 
-            let count = 0;
-            for (let i of stack) {
-                count++;
-                if (wasSplittedIndexes.indexOf(count)) {
+            const i1 = stack.shift();
+            let [fi1, li1] = i1;
+
+            for (let c = 0; c <= stack.length - 1; c++) {
+                
+                const i2 = stack[c];
+                const [fi2, li2] = i2;
+
+                if ( li2 < fi1 || fi2 > li1) {
                     continue;
                 }
 
-                // присоединяем второй элемент к первому
-                const [fi2, li2] = i;
-                
+                isMerged = true;
+                stack.splice(c, 1);
 
+                i1[0] = Math.min(fi1, fi2);
+                i1[1] = Math.max(li1, li2);
+                
             }
+
+            result.push(i1);
             
         }
+
+        // console.log("result", result)
 
         stack = result;
 
     } while (isMerged);
+
+    stack = stack.sort((a, b) => a[0] - b[0]);
+
+    return stack;
 
 }
 
