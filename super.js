@@ -1,6 +1,6 @@
 // https://code.mu/ru/javascript/tasker/stager/
 
-// уровень 2 - очень легкий
+// уровень 2 - очень легкий. потом будет сложнее
 
 //  2.1 
 // 1 Дана некоторая строка. Найдите позицию первого нуля в строке
@@ -69,4 +69,28 @@ for (let i = 0; i <= inputArr.length - 1; i++) {
 let result = firstSum / secondSum;
 // console.log(result)
 
+// 2.4
+// Дана некоторая строка с буквами и цифрами. Получите позицию первой цифры в этой строке.
+const str3 = "dj2ng4";
+
+const splitted2 = str3.split("");
+
+const isNum = (char) => typeof char === 'number' && isFinite(char);
+
+let idx = null;
+let count = 0;
+
+for(let i of splitted2) {
+    if (isNum(parseInt(i, 10))) {
+        idx = count;
+        break;
+    }
+    count++;
+}
+
+// console.log(count)
+
+// Дано число. Выведите в консоль количество четных цифр в этом числе.
+
+const num = 123456;
 
